@@ -35,6 +35,6 @@ export async function createUser(app: FastifyInstance) {
         }
       })
 
-      return reply.status(201).send({message: "usuário criado com sucesso!"})
+      return reply.status(201).send({message: "usuário criado com sucesso!" })
   })
 }

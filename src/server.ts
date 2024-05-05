@@ -5,6 +5,8 @@ import { login } from './http/login';
 import { fastifyJwt } from '@fastify/jwt';
 import { deleteUser } from './http/delete-user';
 import { authenticateToken } from './middleware';
+import { createNews } from './http/create-news';
+import { getNewsOfUser } from './http/get-news-of-user';
 
 const app = Fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -14,6 +16,8 @@ app.setSerializerCompiler(serializerCompiler);
 app.register(createUser)
 app.register(login)
 app.register(deleteUser, authenticateToken)
+app.register(createNews, authenticateToken)
+app.register(getNewsOfUser)
 
 app.register(fastifyJwt, {
   secret: "akd19dd1dj0"
