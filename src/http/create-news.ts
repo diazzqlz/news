@@ -6,13 +6,19 @@ import { prisma } from "../lib/prisma";
 export async function createNews(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post("/news/:userId", {
     schema: {
+      summary: "create a news",
       body: z.object({
         title: z.string().min(5),
         paragraph: z.string().max(120)
       }),
       params: z.object({
         userId: z.string()
-      })
+      }),
+      response: {
+        200: z.object({
+          message: z.string()
+        })
+      }
     }
   }, async(request, reply) => {
       const { title, paragraph } = request.body
