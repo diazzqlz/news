@@ -3,6 +3,7 @@ import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { z } from "zod";
 import { prisma } from "../lib/prisma";
 import jwt from 'jsonwebtoken'
+import bcrypt from 'bcryptjs'
 
 export async function login(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post("/login", {
@@ -24,12 +25,14 @@ export async function login(app: FastifyInstance) {
       if(!user) {
         return reply.status(400).send({message: "usuário nao encontrado!"})
       }
+      
+      const passwordMatch = await bcrypt.compare(password, user.password)
 
-      if(password !== user.password) {
-        return reply.status(400).send({message: "senha incorreta!"})
+      if(!passwordMatch) {
+        return reply.status(400).send({ message: "senha incorreta!" })
       }
-
-      const token = app.jwt.sign({ userId: user.id }, {expiresIn: '5m'})
+      
+      const token = app.jwt.sign({ userId: user.id }, {expiresIn: '10m'})
 
       return reply.status(200).send({message: "usuario logado!", token})
   })

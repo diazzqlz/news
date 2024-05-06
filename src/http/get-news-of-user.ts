@@ -23,7 +23,7 @@ export async function getNewsOfUser(app: FastifyInstance) {
         throw new Error("usuário nao encontrado")
       }
 
-      const news = await prisma.user.findMany({
+      const newsOfUser = await prisma.user.findMany({
         where: {
           id
         },
@@ -33,7 +33,7 @@ export async function getNewsOfUser(app: FastifyInstance) {
       })
 
       return reply.status(200).send({
-        news
+        newsOfUser
       })
   })
 }
