@@ -1,8 +1,7 @@
-import fastify, { FastifyInstance } from "fastify";
+import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { z } from "zod";
 import { prisma } from "../lib/prisma";
-import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 
 export async function login(app: FastifyInstance) {
@@ -31,7 +30,7 @@ export async function login(app: FastifyInstance) {
       if(!passwordMatch) {
         return reply.status(400).send({ message: "senha incorreta!" })
       }
-      
+
       const token = app.jwt.sign({ userId: user.id }, {expiresIn: '10m'})
 
       return reply.status(200).send({message: "usuario logado!", token})

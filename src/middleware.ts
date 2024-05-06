@@ -1,5 +1,4 @@
 import { FastifyInstance } from "fastify";
-import jwt from 'jsonwebtoken'
 
 export async function authenticateToken(app: FastifyInstance) {
   app.addHook("onRequest", async(request, reply) => {
