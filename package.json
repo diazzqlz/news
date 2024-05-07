@@ -20,7 +20,6 @@
     "fastify-type-provider-zod": "^1.1.9",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.6.0",
-    "mongoose": "^8.3.3",
     "zod": "^3.23.6"
   },
   "devDependencies": {
