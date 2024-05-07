@@ -6,6 +6,7 @@ import { prisma } from "../lib/prisma";
 export async function getNewsOfUser(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().get("/news/:id", {
     schema: {
+      tags: ['news'],
       summary: "get news of the user",
       params: z.object({
         id: z.string()

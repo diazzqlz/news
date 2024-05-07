@@ -7,6 +7,7 @@ import bcrypt from 'bcryptjs'
 export async function createUser(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post("/register", {
     schema: {
+      tags: ['user'],
       summary: "create an user",
       body: z.object({
         name: z.string(),

@@ -6,6 +6,7 @@ import { prisma } from "../lib/prisma";
 export async function deleteUser(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().delete("/delete/:userId", {
     schema: {
+      tags: ['user'],
       summary: "delete an user",
       params: z.object({
         userId: z.string()
