@@ -24,16 +24,6 @@ app.register(fastifyCors, {
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
 
-app.register(createUser)
-app.register(login)
-app.register(deleteUser, authenticateToken)
-app.register(createNews, authenticateToken)
-app.register(getNewsOfUser)
-
-app.register(fastifyJwt, {
-  secret: "akd19dd1dj0"
-})
-
 app.register(fastifySwagger, {
   swagger: {
     consumes: ['application/json'],
@@ -49,6 +39,16 @@ app.register(fastifySwagger, {
 
 app.register(fastifySwaggerUi, {
   routePrefix: "/docs"
+})
+
+app.register(createUser)
+app.register(login)
+app.register(deleteUser, authenticateToken)
+app.register(createNews, authenticateToken)
+app.register(getNewsOfUser)
+
+app.register(fastifyJwt, {
+  secret: "akd19dd1dj0"
 })
 
 app.listen({ port: 3333, host: '0.0.0.0'}).then(() => {
